@@ -6,7 +6,7 @@
 # FORGE_FILE_NAME
 # NEOFORGE_FILE_NAME
 
-for filename in ./libs/build; do
+for filename in ./build/libs; do
 if [[ "${fileNames}" == *"fabric"* ]]; then
 	echo "FABRIC_FILE_NAME=${fileNames}" >> $GITHUB_OUTPUT
 elif [[ "${fileNames[i]}" == *"neoforge"* ]]; then
