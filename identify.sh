@@ -10,12 +10,16 @@ for file in ./build/libs/*; do
 	echo ${file}
 	filename=$(basename ${file})
 	if [[ "${fileName}" == *"fabric"* ]]; then
+		echo "FABRIC_FILE_NAME=${fileName}"
 		echo "FABRIC_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
 	elif [[ "${fileName}" == *"neoforge"* ]]; then
+		echo "NEOFORGE_FILE_NAME=${fileName}"
 		echo "NEOFORGE_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
 	elif  [[ "${fileName}" == *"forge"* ]]; then
+		echo "FORGE_FILE_NAME=${fileName}"
 		echo "FORGE_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
 	elif [[ "${fileName}" == *"quilt"* ]]; then
+		echo "QUILT_FILE_NAME=${fileName}"
 		echo "QUILT_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
 	fi
 done
