@@ -7,6 +7,7 @@
 # NEOFORGE_FILE_NAME
 
 for file in ./build/libs/*; do
+	echo ${file}
 	filename=$(basename ${file})
 	if [[ "${fileName}" == *"fabric.jar"* ]]; then
 		echo "FABRIC_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
