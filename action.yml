@@ -54,6 +54,9 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: list
+      shell: bash
+      run: tree ./
     - id: identify
       shell: bash
       run: bash ${{ github.action_path }}/identify.sh
