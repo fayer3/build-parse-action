@@ -32,9 +32,9 @@ array=(${MOD_VERSION})
 IFS=${OLDIFS}
 
 release_type="release"
-if [ ${array[1]:0:1} == "a" ]; then
+if [ ${array[2]:0:1} == "a" ]; then
 	release_type="alpha"
-elif [ ${array[1]:0:1} == "b" ]; then
+elif [ ${array[2]:0:1} == "b" ]; then
 	release_type="beta"
 fi
 

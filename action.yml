@@ -3,7 +3,7 @@ description: parses the source and outputs
 
 inputs:
   mod_version:
-    description: version number opf hte mod, with all suffixes
+    description: version number of the mod, in the form of mc-mod-suffix
     required: true
 
 outputs:
