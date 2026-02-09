@@ -9,13 +9,13 @@
 for file in ./build/libs/*; do
 	echo ${file}
 	filename=$(basename ${file})
-	if [[ "${fileName}" == *"fabric.jar"* ]]; then
+	if [[ "${fileName}" == *"fabric"* ]]; then
 		echo "FABRIC_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
-	elif [[ "${fileName}" == *"neoforge.jar"* ]]; then
+	elif [[ "${fileName}" == *"neoforge"* ]]; then
 		echo "NEOFORGE_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
-	elif  [[ "${fileName}" == *"forge.jar"* ]]; then
+	elif  [[ "${fileName}" == *"forge"* ]]; then
 		echo "FORGE_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
-	elif [[ "${fileName}" == *"quilt.jar"* ]]; then
+	elif [[ "${fileName}" == *"quilt"* ]]; then
 		echo "QUILT_FILE_NAME=${fileName}" >> $GITHUB_OUTPUT
 	fi
 done
