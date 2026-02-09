@@ -22,14 +22,8 @@ parse_forge () {
 	done < ./$1
 }
 
-# save the current IFS value
-OLDIFS=${IFS}
-# set the IFS to the delimiter ("-")
-IFS="-"
 # split the string into an array, limiting it to a maximum of 3 fields
-array=(${MOD_VERSION})
-# restore the IFS value
-IFS=${OLDIFS}
+IFS='-' read -r -a array <<< "${MOD_VERSION}"
 
 release_type="release"
 if [ ${array[2]:0:1} == "a" ]; then
