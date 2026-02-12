@@ -50,7 +50,12 @@ if [ -n "${FORGE_FILE_NAME}" ]; then
 	echo "FORGE_MC_VERSIONS="${parsedVersion}"" >> $GITHUB_OUTPUT
 fi
 if [ -n "${NEOFORGE_FILE_NAME}" ]; then
-	parse_forge ${NEOFORGE_FILE_NAME} "neoforge/src/main/resources/META-INF/neoforge.mods.toml"
+	if [ -f "neoforge/src/main/resources/META-INF/neoforge.mods.toml" ]; then
+		parse_forge ${NEOFORGE_FILE_NAME} "neoforge/src/main/resources/META-INF/neoforge.mods.toml"
+	else
+		# neoforge before 1.20.5 used the same mods.toml as forge
+		parse_forge ${NEOFORGE_FILE_NAME} "neoforge/src/main/resources/META-INF/mods.toml"
+	fi
 	echo "NEOFORGE_MC_VERSIONS="${parsedVersion}"" >> $GITHUB_OUTPUT
 fi
 
