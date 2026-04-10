@@ -46,17 +46,29 @@ loaders_forge="forge"
 loaders_neoforge="neoforge"
 
 if [ -n "${FORGE_FILE_NAME}" ]; then
-	parse_forge "forge/src/main/resources/META-INF/mods.toml"
-	echo "FORGE_MC_VERSIONS="${parsedVersion}"" >> $GITHUB_OUTPUT
+	# first check if it is defined in teh gradle.properties
+	forge_mc_range=$(grep -E '^(forge_mc_range)=' gradle.properties | cut -d= -f2-)
+	if [ -n "${forge_mc_range}" ]; then
+		echo "FORGE_MC_VERSIONS="${forge_mc_range}"" >> $GITHUB_OUTPUT
+	else
+		parse_forge "forge/src/main/resources/META-INF/mods.toml"
+		echo "FORGE_MC_VERSIONS="${parsedVersion}"" >> $GITHUB_OUTPUT
+	fi
 fi
 if [ -n "${NEOFORGE_FILE_NAME}" ]; then
-	if [ -f "neoforge/src/main/resources/META-INF/neoforge.mods.toml" ]; then
-		parse_forge "neoforge/src/main/resources/META-INF/neoforge.mods.toml"
+	# first check if it is defined in teh gradle.properties
+	neoforge_mc_range=$(grep -E '^(neoforge_mc_range)=' gradle.properties | cut -d= -f2-)
+	if [ -n "${neoforge_mc_range}" ]; then
+		echo "NEOFORGE_MC_VERSIONS="${neoforge_mc_range}"" >> $GITHUB_OUTPUT
 	else
-		# neoforge before 1.20.5 used the same mods.toml as forge
-		parse_forge "neoforge/src/main/resources/META-INF/mods.toml"
+		if [ -f "neoforge/src/main/resources/META-INF/neoforge.mods.toml" ]; then
+			parse_forge "neoforge/src/main/resources/META-INF/neoforge.mods.toml"
+		else
+			# neoforge before 1.20.5 used the same mods.toml as forge
+			parse_forge "neoforge/src/main/resources/META-INF/mods.toml"
+		fi
+		echo "NEOFORGE_MC_VERSIONS="${parsedVersion}"" >> $GITHUB_OUTPUT
 	fi
-	echo "NEOFORGE_MC_VERSIONS="${parsedVersion}"" >> $GITHUB_OUTPUT
 fi
 
 echo "LOADERS_FABRIC=${loaders_fabric}" >> $GITHUB_OUTPUT
